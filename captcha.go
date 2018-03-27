@@ -90,7 +90,7 @@ type CaptchaItem struct {
 
 // VerifyCaptcha by given id key, return boolean value.
 // 验证图像验证码,返回boolean.
-func VerifyCaptcha(identifier, verifyValue string) bool {
+func VerifyCaptcha(identifier, verifyValue string, clear bool) bool {
 	if verifyValue == "" {
 		return false
 	}
@@ -100,7 +100,7 @@ func VerifyCaptcha(identifier, verifyValue string) bool {
 	}
 	result := strings.ToLower(storeValue) == strings.ToLower(verifyValue)
 	if result {
-		globalStore.Get(identifier, true)
+		globalStore.Get(identifier, clear)
 	}
 	return result
 }
